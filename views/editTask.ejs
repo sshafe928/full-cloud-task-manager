@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+</head>
+<body>
+    <h1>Edit Task</h1>
+    <form action="/tasks/edit/<%= task._id %>" method="POST" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="<%= task.title %>"><br><br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50"><%= task.description %></textarea>
+        <br><br>
+        <label for="image">Upload Image</label>
+        <input type="file" id="image" name="image" accept="image/*"><br><br>
+        <label for="complete">Completed: </label>
+        <input type="checkbox" id="complete" name="complete" <%= task.complete ? 'checked' : '' %>><br><br>
+        <button type="submit">Update Task</button>
+    </form>
+</body>
+</html>
