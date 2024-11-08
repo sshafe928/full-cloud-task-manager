@@ -1,30 +1,31 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const taskRoutes = require('./routes/taskRoutes');
-const cloudinary = require('cloudinary').v2
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const taskRoutes = require("./routes/taskRoutes");
+const cloudinary = require("cloudinary").v2;
 
 const app = express();
 
-//cloudinary configuration
+// Cloudinary configuration
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-})
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-//setup mongoose
-mongoose.connect(process.env.MONG_URI, {})
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Error connecting to MongoDB:', err));
+// Set up MongoDB connection
+mongoose.connect(process.env.MONGO_URI, {})
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
 
-//Middleware
-app.use(express.urlencoded({ extended: true }))
+// Middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
-//routes
-app.use('/', taskRoutes)
+// Routes
+app.use("/", taskRoutes);
 
-//Server
-app.listen(5000, ()=> console.log('server listening at http://localhost:5000'));
+// Start Server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

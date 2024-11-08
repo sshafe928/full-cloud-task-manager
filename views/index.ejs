@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task manager Full Cloud</title>
+  <meta charset="UTF-8">
+  <title>Task Manager</title>
 </head>
 <body>
-    <h1>Task Manager</h1>
-    <a href="/tasks/new">Add new task</a>
-    <ul>
-        <% tasks.forEach(task =>{ %>
-            <li>
-                <h2><%= task.title %></h2>
-                <p><%= task.description %></p>
-                <% if (task.imageURL) { %>
-                    <img src="<%= task.imageURL %>" alt="Task image" width="100">
-                <% } %>
-                <form action="/tasks.complete/<%= task._id %>" method="POST">
-                    <button type="submit"><% task.completed ? "Completed" : "Mark Complete" %></button>
-                </form>
-                <a href="/tasks/edit/<%= task._id %>">Edit</a>
-                <form action="/tasks/delete/<%= task._id %>" method="POST">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        <% }) %>
-    </ul>
+  <h1>Task Manager</h1>
+  <a href="/tasks/new">Add New Task</a>
+  <ul>
+    <% tasks.forEach(task => { %>
+      <li>
+        <h2><%= task.title %></h2>
+        <p><%= task.description %></p>
+        <% if (task.imageUrl) { %>
+          <img src="<%= task.imageUrl %>" alt="Task Image" width="100">
+        <% } %>
+        <form action="/tasks/complete/<%= task._id %>" method="POST">
+          <button type="submit"><%= task.completed ? "Completed" : "Mark Complete" %></button>
+        </form>
+        <a href="/tasks/edit/<%= task._id %>">Edit</a>
+        <form action="/tasks/delete/<%= task._id %>" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
 </body>
 </html>
